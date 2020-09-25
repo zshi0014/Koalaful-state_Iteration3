@@ -1,0 +1,140 @@
+# Translation of Plugins - Disable Comments - Stable (latest release) in Chinese (China)
+# This file is distributed under the same license as the Plugins - Disable Comments - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2020-08-19 07:14:44+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/3.0.0-alpha.2\n"
+"Language: zh_CN\n"
+"Project-Id-Version: Plugins - Disable Comments - Stable (latest release)\n"
+
+#: disable-comments.php:428
+msgctxt "settings menu title"
+msgid "Disable Comments"
+msgstr "禁用评论"
+
+#: disable-comments.php:420
+msgid "Tools"
+msgstr "工具"
+
+#: disable-comments.php:419
+msgid "Settings"
+msgstr "设置"
+
+#: disable-comments.php:339
+msgid "The <em>Disable Comments</em> plugin is active, but isn't configured to do anything yet. Visit the <a href=\"%s\">configuration page</a> to choose which post types to disable comments on."
+msgstr "<em>禁用评论</em>插件处于活动状态，但尚未配置为执行任何操作。 访问<a href=\"%s\">配置页面</a>，选择要停用评论的帖子类型。"
+
+#: disable-comments.php:313
+msgid ", "
+msgstr ", "
+
+#: disable-comments.php:313
+msgid "Note: The <em>Disable Comments</em> plugin is currently active, and comments are completely disabled on: %s. Many of the settings below will not be applicable for those post types."
+msgstr "注意：<em>禁用评论</em> 插件目前处于启用状态，评论已完全禁用：%s。 以下许多设置不适用于这些文章类型。"
+
+#: disable-comments.php:248 disable-comments.php:347 disable-comments.php:354
+msgid "Comments are closed."
+msgstr "评论关闭了。"
+
+#: disable-comments.php:62
+msgid "Disable Comments requires WordPress version %s or greater."
+msgstr "禁用评论需要WordPress版本 %s 或更高版本。"
+
+#: includes/settings-page.php:81
+msgid "Save Changes"
+msgstr "保存修改"
+
+#: includes/settings-page.php:76
+msgid "Disabling comments will also disable trackbacks and pingbacks. All comment-related fields will also be hidden from the edit/quick-edit screens of the affected posts. These settings cannot be overridden for individual posts."
+msgstr "禁用评论也将禁用trackbacks和pingbacks。 所有评论相关的字段也将从受影响的职位编辑/快速编辑画面隐藏。 这些设置不能被覆盖单个文章。"
+
+#: includes/settings-page.php:64
+msgid "On certain post types"
+msgstr "对某些文章类型使用"
+
+#: includes/settings-page.php:61
+msgid "Disable all comment-related controls and settings in WordPress."
+msgstr "禁用WordPress中的所有评论相关的控件和设置。"
+
+#: includes/settings-page.php:56
+msgid "It seems that a caching/performance plugin is active on this site. Please manually invalidate that plugin's cache after making any changes to the settings below."
+msgstr "看来，在这个网站上有一个缓存/性能插件是激活的。 在对以下设置进行任何更改后，请手动使该插件的缓存失效。"
+
+#: includes/settings-page.php:53
+msgid "<em>Disable Comments</em> is Network Activated. The settings below will affect <strong>all sites</strong> in this network."
+msgstr "<em>禁用评论</em>已启用网络。 以下设置将影响此网络中的<strong>所有网站</strong>。"
+
+#: includes/settings-page.php:50
+msgctxt "settings page title"
+msgid "Disable Comments"
+msgstr "禁用评论"
+
+#: includes/settings-page.php:45
+msgid "Options updated. Changes to the Admin Menu and Admin Bar will not appear until you leave or reload this page."
+msgstr "选项已更新。 在您离开或重新载入此网页之前，系统不会显示管理员选单和管理员控制台的变更。"
+
+#: includes/settings-page.php:44
+msgid "If a caching/performance plugin is active, please invalidate its cache to ensure that changes are reflected immediately."
+msgstr "如果缓存/性能插件处于活动状态，请使其缓存失效，以确保更改立即得到反映。"
+
+#: includes/tools-page.php:166
+msgid "Total Comments:"
+msgstr "总评论:"
+
+#: includes/tools-page.php:147 includes/settings-page.php:74
+msgid "Custom post types:"
+msgstr "自定义帖子类型:"
+
+#: includes/tools-page.php:146 includes/settings-page.php:73
+msgid "Only the built-in post types appear above. If you want to disable comments on other custom post types on the entire network, you can supply a comma-separated list of post types below (use the slug that identifies the post type)."
+msgstr "只有内置文章类型出现以上情况。 如果您想要禁用整个网络上其他自定义文章类型的评论，您可以在下面提供以逗号分隔的帖子类型列表（使用标识帖子类型的slug）。"
+
+#: includes/tools-page.php:137
+msgid "For certain post types"
+msgstr "对某些文章类型使用"
+
+#: includes/tools-page.php:135 includes/tools-page.php:149
+#: includes/tools-page.php:160 includes/settings-page.php:62
+msgid "Warning"
+msgstr "警告"
+
+#: includes/tools-page.php:135
+msgid "%s: This function and will affect your entire site. Use it only if you want to delete comments <em>everywhere</em>."
+msgstr "%s：这个功能会影响你的整个网站。只有当你要<em>到处</em>删除评论使用它。"
+
+#: includes/tools-page.php:134
+msgid "Delete all comments in WordPress."
+msgstr "删除所有在 WordPress 的评论。"
+
+#: includes/tools-page.php:134 includes/settings-page.php:61
+msgid "Everywhere"
+msgstr "任何地方"
+
+#: includes/tools-page.php:94 includes/tools-page.php:118
+msgid "Comment Deletion Complete"
+msgstr "评论删除完成"
+
+#: includes/tools-page.php:88 includes/tools-page.php:106
+msgid "All comments have been deleted for %s."
+msgstr "%s已删除所有评论。"
+
+#: includes/tools-page.php:63 includes/tools-page.php:66
+msgid "Internal error occured. Please try again later."
+msgstr "发生内部错误。请稍后再试。"
+
+#: includes/tools-page.php:61
+msgid "All comments have been deleted."
+msgstr "所有评论都已删除。"
+
+#: includes/tools-page.php:20 includes/tools-page.php:125
+msgid "No comments available for deletion."
+msgstr "没有可删除的评论。"
+
+#: includes/tools-page.php:13 includes/tools-page.php:167
+#: disable-comments.php:441
+msgid "Delete Comments"
+msgstr "删除评论"
