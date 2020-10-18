@@ -69,6 +69,7 @@ class WPDA_Data_Tables
         // Activate scripts and styles
         wp_enqueue_style( 'jquery_datatables' );
         wp_enqueue_style( 'jquery_datatables_responsive' );
+        wp_enqueue_style( 'wpda_datatables_default' );
         wp_enqueue_script( 'jquery_datatables' );
         wp_enqueue_script( 'jquery_datatables_responsive' );
         wp_enqueue_script( 'purl' );
@@ -234,7 +235,13 @@ class WPDA_Data_Tables
         $wpda_database_columns = '';
         $i_offset = 0;
         for ( $i = 0 ;  $i < count( $columns ) ;  $i++ ) {
-            $column_label = ( isset( $column_labels[$columns[$i]] ) ? $column_labels[$columns[$i]] : $columns[$i] );
+            
+            if ( 'wpda_hyperlink_' !== substr( $columns[$i], 0, 15 ) ) {
+                $column_label = ( isset( $column_labels[$columns[$i]] ) ? $column_labels[$columns[$i]] : $columns[$i] );
+            } else {
+                $column_label = $hyperlinks[substr( $columns[$i], strrpos( $columns[$i], '_' ) + 1 )];
+            }
+            
             $wpda_database_columns .= '{ "className": "' . $columns[$i] . '", 
 					"targets": [' . ($i + $i_offset) . '], 
 					"label": "' . $column_label . '" }';
@@ -264,20 +271,31 @@ class WPDA_Data_Tables
         }
         
         $buttons = '[]';
-        return $wpda_wpdataaccess_prepare_filter . "<table id=\"" . esc_attr( $table_name ) . "{$pub_id}\" class=\"display nowrap\" cellspacing=\"0\">" . "\t<thead>" . $this->show_header(
+        $header2 = '';
+        try {
+            $json = json_decode( $pub_table_options_advanced );
+            if ( isset( $json->wpda_searchbox ) ) {
+                $header2 = $json->wpda_searchbox;
+            }
+        } catch ( \Exception $e ) {
+            $json = null;
+        }
+        return $wpda_wpdataaccess_prepare_filter . "<table id=\"" . esc_attr( $table_name ) . "{$pub_id}\" class=\"display\" cellspacing=\"0\">" . "<thead>" . $this->show_header(
             $columns,
             $responsive,
             $responsive_cols,
             $pub_format,
             $hyperlinks,
-            $buttons
-        ) . "</thead>" . "\t<tfoot>" . $this->show_header(
+            $buttons,
+            $header2
+        ) . "</thead>" . "<tfoot>" . $this->show_header(
             $columns,
             $responsive,
             $responsive_cols,
             $pub_format,
             $hyperlinks,
-            $buttons
+            $buttons,
+            ''
         ) . "</tfoot>" . "</table>" . "<script type='text/javascript'>" . "var datatables_i18n_url = '" . plugins_url( '../assets/i18n/', __DIR__ ) . "';" . "var {$columnsvar} = [" . $wpda_database_columns . "];" . "jQuery(document).ready(function () {" . "\twpda_datatables_ajax_call(" . "\t\t" . $columnsvar . "," . "\t\t\"" . esc_attr( $database ) . "\"," . "\t\t\"" . esc_attr( $table_name ) . "\"," . "\t\t\"" . esc_attr( $column_names ) . "\"," . "\t\t\"" . esc_attr( $responsive ) . "\"," . "\t\t\"" . esc_attr( $responsive_popup_title ) . "\"," . "\t\t\"" . esc_attr( $responsive_type ) . "\"," . "\t\t\"" . esc_attr( $responsive_icon ) . "\"," . "\t\t\"" . esc_attr( $pub_format ) . "\"," . "\t\t\"" . esc_attr( $language ) . "\"," . "\t\t\"" . htmlentities( $sql_orderby ) . "\"," . "\t\t" . $pub_table_options_searching . "," . "\t    " . $pub_table_options_ordering . "," . "\t\t" . $pub_table_options_paging . "," . "\t\t\"" . esc_attr( $pub_table_options_advanced ) . "\"," . "\t\t" . $pub_id . "," . "\t\t\"" . esc_attr( $pub_responsive_modal_hyperlinks ) . "\"," . "\t\t[" . implode( ',', $hyperlink_positions ) . "]," . "\t\t\"" . esc_attr( $filter_field_name ) . "\"," . "\t\t\"" . esc_attr( $filter_field_value ) . "\"," . "\t\t\"" . esc_attr( $nl2br ) . "\"," . "\t\t" . $buttons . "" . "\t);" . "});" . "</script>";
     }
     
@@ -290,6 +308,7 @@ class WPDA_Data_Tables
      * @param string $pub_format Formatting options.
      * @param array $hyperlinks Hyperlinks defined in column settings.
      * @param string $buttons Button array (need jQuery DataTables buttons extension).
+     * $param boolean $header2 Adds an extra header row if TRUE
      *
      * @return HTML output
      */
@@ -299,15 +318,22 @@ class WPDA_Data_Tables
         $responsive_cols,
         $pub_format,
         $hyperlinks,
-        $buttons
+        $buttons,
+        $header2
     )
     {
         $count = 0;
         $html_output = '';
+        $html_search = '';
+        
         if ( '[]' !== $buttons ) {
             // Add empty column for custom buttons
-            $html_output = "<th></th>";
+            $html_output = '<th></th>';
+            if ( 'header' === $header2 || 'both' === $header2 ) {
+                $html_search = '<td></td>';
+            }
         }
+        
         $column_labels = null;
         $pub_format = json_decode( $pub_format, true );
         
@@ -317,7 +343,6 @@ class WPDA_Data_Tables
             $column_labels = $this->wpda_list_columns->get_table_column_headers();
         }
         
-        $hyperlink_no = 0;
         foreach ( $columns as $column ) {
             $class = '';
             if ( 'yes' === $responsive ) {
@@ -337,21 +362,26 @@ class WPDA_Data_Tables
             if ( 'wpda_hyperlink_' !== substr( $column, 0, 15 ) ) {
                 $column_label = ( isset( $column_labels[$column] ) ? $column_labels[$column] : $column );
             } else {
-                
-                if ( isset( $hyperlinks[$hyperlink_no] ) ) {
-                    $column_label = $hyperlinks[$hyperlink_no];
-                } else {
-                    $column_label = '';
-                }
-            
+                $column_label = $hyperlinks[substr( $column, strrpos( $column, '_' ) + 1 )];
             }
             
-            $hyperlink_no++;
-            $data_attribute = "data-column_name=\"{$column}\"";
-            $html_output .= "<th class=\"{$class}\" {$data_attribute}>" . $column_label . '</th>';
+            
+            if ( 'header' === $header2 || 'both' === $header2 ) {
+                $html_search .= "<td class=\"{$class}\" data-column_name_search=\"{$column}\"></td>";
+                $html_output .= "<th class=\"{$class}\" data-column_name=\"{$column}\">{$column_label}</th>";
+            } else {
+                $html_output .= "<th class=\"{$class}\" data-column_name_search=\"{$column}\">{$column_label}</th>";
+            }
+            
             $count++;
         }
-        return '<tr>' . $html_output . '</tr>';
+        if ( '' !== $html_search ) {
+            $html_search = "<tr>{$html_search}</tr>";
+        }
+        if ( 'header' === $header2 && 'yes' === $responsive ) {
+            return $html_search;
+        }
+        return "{$html_search}<tr>{$html_output}</tr>";
     }
     
     /**
@@ -696,7 +726,7 @@ class WPDA_Data_Tables
                             $hyperlink_label = ( isset( $hyperlinks[$value]['hyperlink_label'] ) ? $hyperlinks[$value]['hyperlink_label'] : '' );
                             $hyperlink_target = ( isset( $hyperlinks[$value]['hyperlink_target'] ) ? $hyperlinks[$value]['hyperlink_target'] : false );
                             $target = ( true === $hyperlink_target ? "target='_blank'" : '' );
-                            $row[$key] = "<a href='{$hyperlink_html}' {$target}>{$hyperlink_label}</a>";
+                            $row[$key] = "<a href='" . str_replace( ' ', '+', $hyperlink_html ) . "' {$target}>{$hyperlink_label}</a>";
                         }
                     
                     } else {

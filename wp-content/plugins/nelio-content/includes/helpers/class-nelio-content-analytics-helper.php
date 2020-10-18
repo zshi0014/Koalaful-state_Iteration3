@@ -38,6 +38,7 @@ class Nelio_Content_Analytics_Helper {
 	public function init() {
 		add_action( 'cron_schedules', [ $this, 'add_cron_interval' ] );
 		add_action( 'init', [ $this, 'maybe_enable_cron_tasks' ] );
+		add_action( 'wp_update_comment_count', [ $this, 'update_comment_count' ], 10, 3 );
 	}//end init()
 
 	/**
@@ -263,7 +264,7 @@ class Nelio_Content_Analytics_Helper {
 		// Safe guards.
 		if ( empty( $post_id ) ) {
 			return;
-		} //end if
+		}//end if
 
 		if ( ! $this->needs_to_be_updated( $post_id ) ) {
 			return;
@@ -524,11 +525,15 @@ class Nelio_Content_Analytics_Helper {
 	 */
 	public function update_comment_count( $post_id, $new, $old ) {
 
-		$total = intval( get_post_meta( $post_id, '_nc_engagement_total', true ) );
-		$aux   = $new - $old; // Difference in comments.
+		$total = 0;
+		foreach ( self::$engagement_metrics as $metric ) {
+			if ( 'total' === $metric ) {
+				continue;
+			}//end if
+			$total += intval( get_post_meta( $post_id, "_nc_engagement_{$metric}", true ) );
+		}//end foreach
 
-		// Apply the difference to the engagement to update its value.
-		update_post_meta( $post_id, '_nc_engagement_total', $total + $aux );
+		update_post_meta( $post_id, '_nc_engagement_total', $total + $new );
 
 	}//end update_comment_count()
 

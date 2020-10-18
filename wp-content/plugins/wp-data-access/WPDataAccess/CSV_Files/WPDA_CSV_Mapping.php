@@ -30,13 +30,8 @@ namespace WPDataAccess\CSV_Files {
 		protected $schema_name_mapping = null;
 
 		public function __construct() {
-			$this->schema_name =
-				isset( $_REQUEST['schema_name'] ) ?
-					sanitize_text_field( wp_unslash( $_REQUEST['schema_name'] ) ) : null; // input var okay.
-
-			if ( null === $this->schema_name ) {
-				wp_die( __( 'ERROR: Missing argument', 'wp-data-access' ) );
-			}
+			global $wpdb;
+			$this->schema_name = $wpdb->dbname;
 
 			$this->csv_id =
 				isset( $_REQUEST['csv_id'] ) ?

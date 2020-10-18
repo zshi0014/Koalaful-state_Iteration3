@@ -306,7 +306,7 @@ class Nelio_Content_Post_Helper {
 		$result = array_merge(
 			$result,
 			array(
-				'categories'          => $this->get_the_categories( $post, 'name' ),
+				'categoryLabels'      => $this->get_the_categories( $post, 'name' ),
 				'content'             => $this->get_the_content( $post ),
 				'date'                => $result['date'] ?: 'none',
 				'excludedFromReshare' => ! $this->is_auto_share_enabled( $post_id ),

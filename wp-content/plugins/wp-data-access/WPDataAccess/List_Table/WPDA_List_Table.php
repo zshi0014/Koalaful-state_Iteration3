@@ -11,6 +11,7 @@ namespace WPDataAccess\List_Table {
 	use WPDataAccess\Connection\WPDADB;
 	use WPDataAccess\Data_Dictionary\WPDA_Dictionary_Exist;
 	use WPDataAccess\Data_Dictionary\WPDA_List_Columns;
+	use WPDataAccess\Plugin_Table_Models\WPDA_CSV_Uploads_Model;
 	use WPDataAccess\Plugin_Table_Models\WPDA_Media_Model;
 	use WPDataAccess\Utilities\WPDA_Import;
 	use WPDataAccess\Utilities\WPDA_Message_Box;
@@ -768,16 +769,41 @@ namespace WPDataAccess\List_Table {
 						}
 					}
 
+					// Check if row security is enabled
+					$row_security = false;
+					$settings_db = WPDA_Table_Settings_Model::query( $this->table_name, $this->schema_name );
+					if ( isset( $settings_db[0]['wpda_table_settings'] ) ) {
+						$settings_db_custom = json_decode( $settings_db[0]['wpda_table_settings'] );
+						if (
+							isset( $settings_db_custom->table_settings->row_level_security ) &&
+							'true' === $settings_db_custom->table_settings->row_level_security
+						) {
+							$row_security = true;
+						}
+					}
+
 					// To prevent our URLs containing many arguments, we'll use post to submit row actions. Since our
 					// list table is build within a form and we cannot use nested forms we'll use a container (id =
 					// wpda_invisible_container) defined outside the list table, and add our forms to that container.
 					// We'll use jQuery to add our forms to the container. From the links in our rows we can then just
 					// submit any form in that container with jQuery as well.
-					$form_id       = '_' . self::$list_number ++;
-					$wp_nonce_keys = '';
+					$form_id           = '_' . self::$list_number ++;
+					$wp_nonce_keys     = '';
+					$row_security_keys = '';
 					// We need to add keys and values for multi column primary keys.
 					foreach ( $this->wpda_list_columns->get_table_primary_key() as $key ) {
-						$wp_nonce_keys .= "-{$item[$key]}";
+						$wp_nonce_keys     .= "-{$item[$key]}";
+						if ( $row_security ) {
+							$row_security_keys .= "-{$key}-{$item[$key]}";
+						}
+					}
+
+					if ( $row_security ) {
+						$row_security_nonce       = wp_create_nonce( "wpda-row-level-security-{$this->table_name}{$row_security_keys}" );
+						$row_security_nonce_field =
+							"<input type='hidden' name='rownonce' value='" . esc_attr( $row_security_nonce ) . "' />";
+					} else {
+						$row_security_nonce_field = '';
 					}
 
 					// Prepare url
@@ -806,6 +832,7 @@ namespace WPDataAccess\List_Table {
 							$this->get_key_input_fields( $item ) .
 							$this->add_parent_args_as_string( $item ) .
 							"<input type='hidden' name='action' value='view' />" .
+							$row_security_nonce_field .
 							$this->page_number_item .
 							"</form>"
 						?>
@@ -845,6 +872,7 @@ namespace WPDataAccess\List_Table {
 							$this->get_key_input_fields( $item ) .
 							$this->add_parent_args_as_string( $item ) .
 							"<input type='hidden' name='action' value='edit' />" .
+							$row_security_nonce_field .
 							$this->page_number_item .
 							"</form>";
 						?>
@@ -887,6 +915,7 @@ namespace WPDataAccess\List_Table {
 							$this->add_parent_args_as_string( $item ) .
 							"<input type='hidden' name='action' value='delete' />" .
 							"<input type='hidden' name='_wpnonce' value='$wp_nonce'>" .
+							$row_security_nonce_field .
 							$this->page_number_item .
 							"</form>";
 						?>
@@ -924,6 +953,7 @@ namespace WPDataAccess\List_Table {
 						// Use filter
 						$filter = apply_filters(
 							'wpda_column_default',
+							'',
 							$item,
 							$column_name,
 							$this->table_name,
@@ -959,7 +989,7 @@ namespace WPDataAccess\List_Table {
 
 							$target = true===$hyperlink_target ? "target='_blank'" : '';
 
-							return "<a href='{$hyperlink_html}' {$target}>{$hyperlink_label}</a>";
+							return "<a href='" . str_replace( ' ', '+', $hyperlink_html ) . "' {$target}>{$hyperlink_label}</a>";
 						}
 					}
 
@@ -1071,6 +1101,7 @@ namespace WPDataAccess\List_Table {
 					// Use filter
 					$filter = apply_filters(
 						'wpda_column_default',
+						'',
 						$item,
 						$column_name,
 						$this->table_name,
@@ -1223,6 +1254,7 @@ namespace WPDataAccess\List_Table {
 			if ( has_filter('wpda_column_default_add_action') ) {
 				$filter = apply_filters(
 					'wpda_column_default_add_action',
+					'',
 					$item,
 					$column_name,
 					$this->table_name,
@@ -1615,7 +1647,12 @@ namespace WPDataAccess\List_Table {
 					if ( $this->table_name === self::LIST_BASE_TABLE ) {
 						$table_name = str_replace( '.', '_', WPDA_List_Table::LIST_BASE_TABLE );
 					} else {
-						$table_name = str_replace( '.', '_', $this->schema_name . $this->table_name );
+						global $wpdb;
+						if ( $this->schema_name === $wpdb->dbname && $this->table_name === WPDA_CSV_Uploads_Model::get_base_table_name() ) {
+							$table_name = $this->table_name; // csv upload = exception
+						} else {
+							$table_name = str_replace( '.', '_', $this->schema_name . $this->table_name );
+						}
 					}
 					$hidden = get_user_option( WPDA_List_View::HIDDENCOLUMNS_PREFIX . get_current_screen()->id . $table_name );
 					if ( false === $hidden ) {

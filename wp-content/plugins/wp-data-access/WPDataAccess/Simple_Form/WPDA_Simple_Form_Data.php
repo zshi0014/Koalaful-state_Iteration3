@@ -11,6 +11,7 @@ namespace WPDataAccess\Simple_Form {
 	use WPDataAccess\Connection\WPDADB;
 	use WPDataAccess\Data_Dictionary\WPDA_Dictionary_Exist;
 	use WPDataAccess\Data_Dictionary\WPDA_List_Columns;
+	use WPDataAccess\Plugin_Table_Models\WPDA_Table_Settings_Model;
 	use WPDataAccess\Utilities\WPDA_Message_Box;
 	use WPDataAccess\WPDA;
 
@@ -211,6 +212,25 @@ namespace WPDataAccess\Simple_Form {
 		 *
 		 */
 		public function get_row( $auto_increment_value, $wpda_err ) {
+			$settings_db = WPDA_Table_Settings_Model::query( $this->table_name, $this->schema_name );
+			if ( isset( $settings_db[0]['wpda_table_settings'] ) ) {
+				$settings_db_custom = json_decode( $settings_db[0]['wpda_table_settings'] );
+				if (
+					isset( $settings_db_custom->table_settings->row_level_security ) &&
+					'true' === $settings_db_custom->table_settings->row_level_security
+				) {
+					// Check access
+					$wp_nonce = isset( $_REQUEST['rownonce'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['rownonce'] ) ) : ''; // input var okay.
+					$keys     = '';
+					foreach ( $this->wpda_list_columns->get_table_primary_key() as $key ) {
+						$keys .= "-{$key}-" . $this->calling_form->get_new_value( $key );
+					}
+					if ( ! wp_verify_nonce( $wp_nonce, "wpda-row-level-security-{$this->table_name}{$keys}" ) ) {
+						wp_die( __( 'ERROR: Not authorized', 'wp-data-access' ) );
+					}
+				}
+			}
+
 			$wpdadb = WPDADB::get_db_connection( $this->schema_name );
 
 			$table_columns = []; // Get all table columns.

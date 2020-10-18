@@ -8,11 +8,13 @@
 
 namespace WPDataAccess\List_Table {
 
+	use WPDataAccess\CSV_Files\WPDA_CSV_List_Table;
 	use WPDataAccess\Data_Dictionary\WPDA_List_Columns;
 	use WPDataAccess\Data_Dictionary\WPDA_List_Columns_Cache;
 	use WPDataAccess\Data_Publisher\WPDA_Publisher_List_Table;
 	use WPDataAccess\Design_Table\WPDA_Design_Table_Form;
 	use WPDataAccess\Design_Table\WPDA_Design_Table_List_Table;
+	use WPDataAccess\Plugin_Table_Models\WPDA_CSV_Uploads_Model;
 	use WPDataAccess\Plugin_Table_Models\WPDA_Design_Table_Model;
 	use WPDataAccess\Plugin_Table_Models\WPDA_Publisher_Model;
 	use WPDataAccess\Plugin_Table_Models\WPDP_Page_Model;
@@ -590,7 +592,12 @@ namespace WPDataAccess\List_Table {
 			if ( false !== $this->child_request ) {
 				$table_name = str_replace( '.', '_', $this->schema_name . $this->child_request );
 			} else {
-				$table_name = str_replace( '.', '_', $this->schema_name . $this->table_name );
+				global $wpdb;
+				if ( $this->schema_name === $wpdb->dbname && $this->table_name === WPDA_CSV_Uploads_Model::get_base_table_name() ) {
+					$table_name = $this->table_name; // csv upload = exception
+				} else {
+					$table_name = str_replace( '.', '_', $this->schema_name . $this->table_name );
+				}
 			}
 
 			add_filter( 'screen_settings', [ $this, 'show_screen_options' ], 10, 2 );
@@ -720,6 +727,21 @@ namespace WPDataAccess\List_Table {
 								$hidden
 							);
 						}
+					}  elseif ( WPDA_CSV_Uploads_Model::get_base_table_name() === $this->table_name ) {
+						if ( is_admin() &&
+							false === get_user_option( self::HIDDENCOLUMNS_PREFIX . get_current_screen()->id . $table_name )
+						) {
+							$hidden = [
+								'csv_real_file_name',
+								'csv_mapping',
+							];
+
+							update_user_meta(
+								get_current_user_id(),
+								self::HIDDENCOLUMNS_PREFIX . get_current_screen()->id . $table_name,
+								$hidden
+							);
+						}
 					}
 
 					// Allow external user to store defaults through action hook wpda_default_screen_option.
@@ -813,6 +835,9 @@ namespace WPDataAccess\List_Table {
 			} elseif ( WPDP_Page_Model::get_base_table_name() === $this->table_name ) {
 				// We're on the Data Publisher page. Use user defined labels.
 				return WPDP_Project_Page_List::column_headers_labels();
+			} elseif ( WPDA_CSV_Uploads_Model::get_base_table_name() === $this->table_name ) {
+				// We're on the CSV import page. Use user defined labels.
+				return WPDA_CSV_List_Table::column_headers_labels();
 			} else {
 				if ( has_filter('wpda_get_column_headers') ) {
 					// Use filter
@@ -868,7 +893,12 @@ namespace WPDataAccess\List_Table {
 					if ( '' === $this->table_name ) {
 						$table_name = str_replace( '.', '_', WPDA_List_Table::LIST_BASE_TABLE );
 					} else {
-						$table_name = str_replace( '.', '_', $this->schema_name . $this->table_name );
+						global $wpdb;
+						if ( $this->schema_name === $wpdb->dbname && $this->table_name === WPDA_CSV_Uploads_Model::get_base_table_name() ) {
+							$table_name = $this->table_name; // csv upload = exception
+						} else {
+							$table_name = str_replace( '.', '_', $this->schema_name . $this->table_name );
+						}
 					}
 					$cols = $this->get_column_headers();
 				}

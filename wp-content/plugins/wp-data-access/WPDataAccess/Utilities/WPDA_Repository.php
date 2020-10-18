@@ -136,8 +136,9 @@ namespace WPDataAccess\Utilities {
 					// We only need to process the first script as this creates the table
 					if ( $this->run_script( $value[0], '_new' ) ) {
 						// Check structure old table
+						var_dump('test');
 						$sql_check_table =
-							"select column_name " .
+							"select column_name as column_name " .
 							"from information_schema.columns " .
 							"where table_schema = '{$wpdb->dbname}' " .
 							"  and table_name   = '{$table_name}' ";
@@ -146,7 +147,7 @@ namespace WPDataAccess\Utilities {
 
 						// Check structure new table
 						$sql_check_table =
-							"select column_name " .
+							"select column_name as column_name " .
 							"from information_schema.columns " .
 							"where table_schema = '{$wpdb->dbname}' " .
 							"  and table_name   = '{$table_name}_new' ";
@@ -155,7 +156,7 @@ namespace WPDataAccess\Utilities {
 
 						// Check if columns old and new are the same
 						$sql_check_table =
-							"select c1.column_name AS column_name " .
+							"select c1.column_name as column_name " .
 							"from information_schema.columns c1 " .
 							"where c1.table_schema = '{$wpdb->dbname}' " .
 							"  and c1.table_name   = '$table_name' " .

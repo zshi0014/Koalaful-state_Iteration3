@@ -4,7 +4,7 @@
  * Plugin Name:       WP Data Access
  * Plugin URI:        https://wpdataaccess.com/
  * Description:       Local and remote data administration, publication and app development tool available directly from the WordPress dashboard.
- * Version:           3.6.0
+ * Version:           3.6.5
  * Author:            Passionate Programmers
  * Author URI:        https://wpdataaccess.com/
  * Text Domain:       wp-data-access
@@ -170,22 +170,22 @@ if ( function_exists( 'wpda_fremius' ) ) {
             10,
             2
         );
-        /**
-         * Start plugin
-         *
-         * @author  Peter Schulz
-         * @since   1.0.0
-         */
-        function run_wp_data_access()
-        {
-            require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-data-access.php';
-            $wpdataaccess = new WP_Data_Access();
-            $wpdataaccess->run();
-        }
-        
-        run_wp_data_access();
     }
-
+    
+    /**
+     * Start plugin
+     *
+     * @author  Peter Schulz
+     * @since   1.0.0
+     */
+    function run_wp_data_access()
+    {
+        require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-data-access.php';
+        $wpdataaccess = new WP_Data_Access();
+        $wpdataaccess->run();
+    }
+    
+    run_wp_data_access();
 }
 
 /**
@@ -206,7 +206,7 @@ function wpda_uninstall_blog()
     global  $wpdb ;
     $drop_tables = get_option( 'wpda_uninstall_tables' );
     
-    if ( !$drop_tables || 'on' === $drop_tables ) {
+    if ( 'on' === $drop_tables ) {
         // Get all plugin table names (without WP prefix)
         $plugin_tables = WPDataAccess\WPDA::get_wpda_tables();
         foreach ( $plugin_tables as $plugin_table ) {
@@ -214,7 +214,7 @@ function wpda_uninstall_blog()
             // Drop plugin table
             $wpdb->query( "DROP TABLE IF EXISTS {$plugin_table}" );
             // Get plugin backup tables (if applicable)
-            $query = "select table_name from information_schema.tables " . "where table_schema = '{$wpdb->dbname}' " . "  and table_name like '{$plugin_table}_BACKUP_%'";
+            $query = "select table_name as table_name from information_schema.tables " . "where table_schema = '{$wpdb->dbname}' " . "  and table_name like '{$plugin_table}_BACKUP_%'";
             $backup_tables = $wpdb->get_results( $query, 'ARRAY_A' );
             foreach ( $backup_tables as $backup_table ) {
                 // Drop plugin backup table
@@ -225,7 +225,7 @@ function wpda_uninstall_blog()
     
     $delete_options = get_option( 'wpda_uninstall_options' );
     
-    if ( !$delete_options || 'on' === $delete_options ) {
+    if ( 'on' === $delete_options ) {
         // Delete all options from wp_options.
         $wpdb->query( "\n\t\t\t\tDELETE FROM {$wpdb->options}\n\t\t\t\tWHERE option_name LIKE 'wpda_%'\n\t\t\t" );
         // db call ok; no-cache ok.

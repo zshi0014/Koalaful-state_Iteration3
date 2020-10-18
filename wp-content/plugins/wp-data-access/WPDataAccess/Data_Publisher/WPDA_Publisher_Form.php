@@ -405,6 +405,15 @@ namespace WPDataAccess\Data_Publisher {
 				}
 				?>
 
+				var hyperlinks = [];
+				<?php
+				if ( null !== $this->hyperlinks && is_array( $this->hyperlinks ) ) {
+					foreach ( $this->hyperlinks as $hyperlink ) {
+						echo "hyperlinks.push('{$hyperlink}');";
+					}
+				}
+				?>
+
 				function select_available(e) {
 					var option = jQuery("#columns_available option:selected");
 					var add_to = jQuery("#columns_selected");
@@ -444,15 +453,6 @@ namespace WPDataAccess\Data_Publisher {
 						alert("<?php echo __( 'To select columns you need to save your publication first', 'wp-data-access' ); ?>");
 						return;
 					}
-
-					var hyperlinks = [];
-					<?php
-					if ( null !== $this->hyperlinks && is_array( $this->hyperlinks ) ) {
-						foreach ( $this->hyperlinks as $hyperlink ) {
-							echo "hyperlinks.push('{$hyperlink}');";
-						}
-					}
-					?>
 
 					var columns_available = jQuery(
 						'<select id="columns_available" name="columns_available[]" multiple size="8" style="width:200px" onchange="select_available()">' +
@@ -576,20 +576,20 @@ namespace WPDataAccess\Data_Publisher {
 
 					<?php
 					foreach ( $table_columns->get_table_columns() as $table_column ) {
-					?>
-					columns_label = '<?php echo esc_attr( $table_column['column_name'] ); ?>';
-					if (typeof columns_labels !== 'undefined') {
-						if (columns_label in columns_labels) {
-							columns_label = columns_labels[columns_label];
+						?>
+						columns_label = '<?php echo esc_attr( $table_column['column_name'] ); ?>';
+						if (typeof columns_labels !== 'undefined') {
+							if (columns_label in columns_labels) {
+								columns_label = columns_labels[columns_label];
+							}
 						}
-					}
-					dialog_table.append(
-						jQuery('<tr></tr>').append(
-							jQuery('<td style="text-align:left;"><?php echo esc_attr( $table_column['column_name'] ); ?></td>'),
-							jQuery('<td style="text-align:left;"><input type="text" class="column_label" name="<?php echo esc_attr( $table_column['column_name'] ); ?>" value="' + columns_label + '"></td>'),
-						)
-					);
-					<?php
+						dialog_table.append(
+							jQuery('<tr></tr>').append(
+								jQuery('<td style="text-align:left;"><?php echo esc_attr( $table_column['column_name'] ); ?></td>'),
+								jQuery('<td style="text-align:left;"><input type="text" class="column_label" name="<?php echo esc_attr( $table_column['column_name'] ); ?>" value="' + columns_label + '"></td>'),
+							)
+						);
+						<?php
 					}
 					?>
 
@@ -652,7 +652,7 @@ namespace WPDataAccess\Data_Publisher {
 				$publication      = $wpda_data_tables->show( $pub_id, '', '', '', '', '', '', '', '', '' );
 			}
 			?>
-			<div id="data_publisher_test_container_<?php echo esc_html( $pub_id ); ?>">
+			<div id="data_publisher_test_container_<?php echo esc_html( $pub_id ); ?>" style="width:95%">
 				<style>
 					#data_publisher_test_header_<?php echo esc_html( $pub_id); ?> {
 						background-color: #ccc;
@@ -671,6 +671,7 @@ namespace WPDataAccess\Data_Publisher {
 						background-color: white;
 						border: 1px solid #ccc;
 						width: max-content;
+						z-index: 999;
 					}
 				</style>
 				<div id="data_publisher_test_header_<?php echo esc_html( $pub_id ); ?>">

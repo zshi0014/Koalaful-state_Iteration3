@@ -594,7 +594,8 @@ class IS_Search_Editor
             echo  '<div class="is-cb-multisel">' ;
             foreach ( $post_statuses as $key => $post_status ) {
                 $checked = ( isset( $includes['post_status'][esc_attr( $key )] ) ? $includes['post_status'][esc_attr( $key )] : 0 );
-                echo  '<label for="' . $id . '-post_status-' . esc_attr( $key ) . '"><input class="_is_includes-post_status" type="checkbox" ' . $post_status_disable . ' id="' . $id . '-post_status-' . esc_attr( $key ) . '" name="' . $id . '[post_status][' . esc_attr( $key ) . ']" value="' . esc_attr( $key ) . '" ' . checked( $key, $checked, false ) . '/>' ;
+                $temp = ( 'publish' === $post_status || 'inherit' === $post_status ? '' : $post_status_disable );
+                echo  '<label for="' . $id . '-post_status-' . esc_attr( $key ) . '"><input class="_is_includes-post_status" type="checkbox" ' . $temp . ' id="' . $id . '-post_status-' . esc_attr( $key ) . '" name="' . $id . '[post_status][' . esc_attr( $key ) . ']" value="' . esc_attr( $key ) . '" ' . checked( $key, $checked, false ) . '/>' ;
                 echo  '<span class="toggle-check-text"></span> ' . ucwords( str_replace( '-', ' ', esc_html( $post_status ) ) ) . '</label>' ;
             }
             echo  '</div></div>' ;

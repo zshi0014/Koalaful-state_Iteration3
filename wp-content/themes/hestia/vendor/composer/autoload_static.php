@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit8edf8e3315fc7b7b88412edc85876ca2
+class ComposerStaticInit3d842f2edf477a4257d7be0289910da5
 {
     public static $files = array (
         '3c811c5eee2f69449ba771bff79ea54a' => __DIR__ . '/..' . '/codeinwp/ti-about-page/load.php',

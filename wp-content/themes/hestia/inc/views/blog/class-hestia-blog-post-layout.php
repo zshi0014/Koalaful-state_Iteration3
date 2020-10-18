@@ -197,7 +197,7 @@ class Hestia_Blog_Post_Layout {
 			$post_body_content .= '<div class="card-body">';
 		}
 		$post_body_content .= '<h6 class="category text-info">';
-		//$post_body_content .= hestia_category();
+		$post_body_content .= hestia_category();
 		$post_body_content .= '</h6>';
 
 		$post_body_content .= the_title(
@@ -288,35 +288,35 @@ class Hestia_Blog_Post_Layout {
 	 * Render post meta.
 	 */
 	private function render_post_meta() {
-	$post_meta_content  = '';
-	$post_meta_content .= '<div class="posted-by vcard author">';
+		$post_meta_content  = '';
+		$post_meta_content .= '<div class="posted-by vcard author">';
 		$post_meta_content .= apply_filters(
 			'hestia_blog_post_meta',
-		sprintf(
-			/* translators: %1$s is Author name wrapped, %2$s is Time */
-			esc_html__( 'By %1$s, %2$s', 'hestia' ),
 			sprintf(
-				/* translators: %1$s is Author name, %2$s is author link */
-				'<a href="%2$s" title="%1$s" class="url"><b class="author-name fn">%1$s</b></a>',
-				esc_html( get_the_author() ),
-				esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) )
-			),
-			sprintf(
-				/* translators: %1$s is Time since post, %2$s is author Close tag */
-					esc_html__( '%1$s ago %2$s', 'hestia' ),
+				/* translators: %1$s is Author name wrapped, %2$s is Time */
+				esc_html__( 'By %1$s, %2$s', 'hestia' ),
 				sprintf(
-					/* translators: %1$s is Time since, %2$s is Link to post */
-					'<a href="%2$s">%1$s',
+					/* translators: %1$s is Author name, %2$s is author link */
+					'<a href="%2$s" title="%1$s" class="url"><b class="author-name fn">%1$s</b></a>',
+					esc_html( get_the_author() ),
+					esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) )
+				),
+				sprintf(
+					/* translators: %1$s is Time since post, %2$s is author Close tag */
+					esc_html__( '%1$s ago %2$s', 'hestia' ),
+					sprintf(
+						/* translators: %1$s is Time since, %2$s is Link to post */
+						'<a href="%2$s">%1$s',
 						$this->get_time_tags(),
 						esc_url( get_permalink() )
 					),
-				'</a>'
+					'</a>'
 				)
 			)
 		);
 		$post_meta_content .= '</div>';
 
-		//return $post_meta_content;
+		return $post_meta_content;
 	}
 
 	/**

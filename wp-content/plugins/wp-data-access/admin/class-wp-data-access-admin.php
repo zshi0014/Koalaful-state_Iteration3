@@ -6,6 +6,7 @@
  * @package plugin\admin
  */
 use  WPDataAccess\Backup\WPDA_Data_Export ;
+use  WPDataAccess\Plugin_Table_Models\WPDA_CSV_Uploads_Model ;
 use  WPDataAccess\Plugin_Table_Models\WPDA_Design_Table_Model ;
 use  WPDataAccess\List_Table\WPDA_List_View ;
 use  WPDataAccess\Settings\WPDA_Settings ;
@@ -316,13 +317,7 @@ class WP_Data_Access_Admin
             [ 'jquery' ],
             WPDA::get_option( WPDA::OPTION_WPDA_VERSION )
         );
-        // Register clipboard.js external library.
-        wp_register_script(
-            'clipboard',
-            plugins_url( '../assets/js/clipboard.min.js', __FILE__ ),
-            [],
-            WPDA::get_option( WPDA::OPTION_WPDA_VERSION )
-        );
+        // Register clipboard.js
         wp_enqueue_script( 'clipboard' );
         
         if ( self::PAGE_PUBLISHER === $this->page ) {
@@ -397,11 +392,17 @@ class WP_Data_Access_Admin
                 self::PAGE_MAIN,
                 [ $this, 'data_explorer_page' ]
             );
+            
             if ( $this->page === self::PAGE_MAIN ) {
-                $this->wpda_data_explorer_view = new WPDA_List_View( [
+                $args = [
                     'page_hook_suffix' => $this->wpda_data_explorer_menu,
-                ] );
+                ];
+                if ( isset( $_REQUEST['page_action'] ) && 'wpda_import_csv' === $_REQUEST['page_action'] || isset( $_REQUEST['table_name'] ) && 'wp_wpda_csv_uploads' === $_REQUEST['table_name'] ) {
+                    $args['table_name'] = WPDA_CSV_Uploads_Model::get_base_table_name();
+                }
+                $this->wpda_data_explorer_view = new WPDA_List_View( $args );
             }
+            
             // Add submenu for Data Publisher
             $data_publisher_table_found = WPDA_Publisher_Model::table_exists();
             

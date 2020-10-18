@@ -131,7 +131,7 @@
 	    });
             
             $(window).on('resize scroll', function(){
-                if ( $( focused ).hasClass( 'is-ajax-search' ) ) {
+                if ( $( focused ).hasClass( 'is-ajax-search' ) && '' !== $( focused ).val() ) {
 
                     var form_id = $( focused ).attr( 'data-form-id' );
 

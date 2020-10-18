@@ -3,9 +3,9 @@ Contributors: nelio, davilera, avillegasn
 Donate Link: https://neliosoftware.com/content/?utm_source=wordpressorg&utm_campaign=nc_plugin_directory&utm_medium=direct
 Tags: auto publish, content marketing, editorial calendar, social media, inbound marketing, engagement, twitter, facebook, linkedin, instagram, pinterest, google plus
 Requires PHP: 7.0
-Requires at least: 5.3
+Requires at least: 5.4
 Tested up to: 5.5
-Stable tag: 2.0.6
+Stable tag: 2.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -149,6 +149,21 @@ If you have more questions, just take a look at our [Knowledge Base](https://nel
 
 == Changelog ==
 
+= 2.0.7 (October 9, 2020) =
+* **WordPress Minimum Version** is now 5.4.
+* **Bug Fix**. Refactor `edit-post` and `data` stores to store comments in `data`.
+* **Bug Fix**. Modify edit and unschedule post methods to remove previous `post_date` when unscheduling.
+* **Bug Fix**. Add missing hook to update engagement metric when there’s a new comment.
+* **Bug Fix**. Fix post edit screen to properly load post analytics when required.
+* **Bug Fix**. Fix post filter in calendar.
+* **Bug Fix**. Change `categories` value in AWS-encoded posts to fix social template usage in automations.
+* **Bug Fix**. Fix post search to prevent post duplication when searching by ID.
+* **Improvement**. Add check to detect profiles that need re-authentication and warn users if needed.
+* **Improvement**. Add related post in dialog for viewing published social messages.
+* **Improvement**. Update UI string to better explain how to activate Google analytics.
+* **Improvement**. Modify social message editor to show warning if there aren’t any profiles available.
+* **Improvement**. Add new UI elements to let the users know that free preview messages require a subscription.
+
 = 2.0.6 (September 21, 2020) =
 * **Improvement**. Hide “Nelio Content Tools” sidebar when editing a new post that hasn’t been saved yet.
 * **Bug Fix**. Modify Nelio Content’s REST API to update post related items (i.e. messages and tasks) when updating a post.
@@ -187,5 +202,5 @@ If you have more questions, just take a look at our [Knowledge Base](https://nel
 
 == Upgrade Notice ==
 
-= 2.0.6 (September 21, 2020) =
-One bug fix and one improvement.
+= 2.0.7 (October 9, 2020) =
+Bug fixes.

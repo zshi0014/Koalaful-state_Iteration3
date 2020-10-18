@@ -556,6 +556,7 @@ class Nelio_Content_Post_REST_Controller extends WP_REST_Controller {
 			$post_data['post_date']     = "$date $time:00";
 			$post_data['post_date_gmt'] = get_gmt_from_date( date( 'Y-m-d H:i:s', strtotime( "$date $time:00" ) ) );
 		} else {
+			$post_data['post_date']     = '0000-00-00 00:00:00';
 			$post_data['post_date_gmt'] = '0000-00-00 00:00:00';
 		}//end if
 
@@ -664,9 +665,23 @@ class Nelio_Content_Post_REST_Controller extends WP_REST_Controller {
 			return $post;
 		}//end if
 
-		$post->post_date_gmt = '0000-00-00 00:00:00';
-		wp_update_post( $post );
+		wp_update_post(
+			array(
+				'ID'            => $post_id,
+				'post_date'     => '0000-00-00 00:00:00',
+				'post_date_gmt' => '0000-00-00 00:00:00',
+				'edit_date'     => true,
+			)
+		);
 		$this->trigger_save_post_action( $post_id, false );
+
+		$post = get_post( $post_id ); // phpcs:ignore
+		if ( ! $post || is_wp_error( $post ) ) {
+			return new WP_Error(
+				'internal-error',
+				_x( 'Post was successfully unscheduled, but could not be retrieved.', 'text', 'nelio-content' )
+			);
+		}//end if
 
 		$post_helper = Nelio_Content_Post_Helper::instance();
 		return new WP_REST_Response( $post_helper->post_to_json( $post ), 200 );
@@ -704,6 +719,8 @@ class Nelio_Content_Post_REST_Controller extends WP_REST_Controller {
 	}//end trigger_save_post_action()
 
 	private function search_wp_posts( $query, $args ) {
+
+		global $post;
 
 		$page     = $args['page'];
 		$per_page = $args['per_page'];
@@ -745,16 +762,12 @@ class Nelio_Content_Post_REST_Controller extends WP_REST_Controller {
 		while ( $wp_query->have_posts() ) {
 
 			$wp_query->the_post();
-
-			if ( get_the_ID() === $post_id ) {
-				continue;
+			if ( absint( $query ) !== $post->ID ) {
+				array_push(
+					$posts,
+					$post_helper->post_to_json( $post )
+				);
 			}//end if
-
-			global $post;
-			array_push(
-				$posts,
-				$post_helper->post_to_json( $post )
-			);
 
 		}//end while
 

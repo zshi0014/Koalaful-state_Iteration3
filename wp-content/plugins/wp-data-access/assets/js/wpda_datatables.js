@@ -78,19 +78,20 @@ function wpda_datatables_ajax_call(
 						if (columnsvar[i].className==='wpda_select') {
 							return '';
 						}
+						hide_header_and_footer_of_hidden_column(table_name, pub_id, i);
 						if (pub_show_advanced_settings==='Never' && modal_hyperlinks.includes(i)) {
 							return '';
 						}
 						if (pub_show_advanced_settings==='If not listed' && modal_hyperlinks.includes(i) && !col.hidden) {
 							return '';
 						}
-						return '<tr>' +
+						return '<tr class="' + columnsvar[i].className + '">' +
 							'<td>' + columnsvar[i].label + '</td>' +
 							'<td><strong>' + col.data + '</strong></td>' +
 							'</tr>';
 					}
 				).join( '' );
-				var datatable = '<table class="display dataTable">' + data + '</table>';
+				var datatable = '<table class="wpda-child-table display dataTable">' + data + '</table>';
 				var table     = '<tr><td>' + datatable + '</td></tr>';
 
 				return jQuery( '<table/>' ).append( table );
@@ -111,19 +112,20 @@ function wpda_datatables_ajax_call(
 						if (columnsvar[i].className==='wpda_select') {
 							return '';
 						}
+						hide_header_and_footer_of_hidden_column(table_name, pub_id, i);
 						if (pub_show_advanced_settings==='Never' && modal_hyperlinks.includes(i)) {
 							return '';
 						}
 						if (pub_show_advanced_settings==='If not listed' && modal_hyperlinks.includes(i) && !col.hidden) {
 							return '';
 						}
-						return '<tr>' +
+						return '<tr class="' + columnsvar[i].className + '">' +
 							'<td>' + columnsvar[i].label + '</td>' +
 							'<td><strong>' + col.data + '</strong></td>' +
 							'</tr>';
 					}
 				).join( '' );
-				var datatable = '<table class="display dataTable">' + data + '</table>';
+				var datatable = '<table class="wpda-child-table display dataTable">' + data + '</table>';
 				var table     = '<tr><td>' + datatable + '</td></tr>';
 
 				return jQuery( '<table/>' ).append( table );
@@ -144,6 +146,9 @@ function wpda_datatables_ajax_call(
 			renderer: function (api, rowIdx, columns) {
 				var data = jQuery.map(
 					columns, function (col, i) {
+						if (col.hidden) {
+							hide_header_and_footer_of_hidden_column(table_name, pub_id, i);
+						}
 						if (columnsvar[i].className==='wpda_select') {
 							return '';
 						}
@@ -153,13 +158,13 @@ function wpda_datatables_ajax_call(
 						if (pub_show_advanced_settings==='If not listed' && modal_hyperlinks.includes(i) && !col.hidden) {
 							return '';
 						}
-						return '<tr>' +
+						return '<tr class="' + columnsvar[i].className + '">' +
 							'<td>' + columnsvar[i].label + '</td>' +
 							'<td><strong>' + col.data + '</strong></td>' +
 							'</tr>';
 					}
 				).join( '' );
-				var datatable = '<table class="display dataTable">' + data + '</table>';
+				var datatable = '<table class="wpda-child-table display dataTable">' + data + '</table>';
 				var footer    = '<tr><td style="padding-top:10px; text-align: center"><div>' +
 					'<input type="button" value="Close" class="button dtr-modal-close" onclick="jQuery(\'.dtr-modal\').remove()"/>' +
 					'</div></td></tr>';
@@ -267,27 +272,47 @@ function wpda_datatables_ajax_call(
 	if (table_options_advanced!='') {
 		try {
 			var advancedOptions = JSON.parse(jQuery("<textarea/>").html(table_options_advanced).text());
-			for (var prop in advancedOptions) {
-				if (typeof advancedOptions[prop]=='string') {
-					if (advancedOptions[prop].substr(0,8)=='function') {
-						fnc = advancedOptions[prop];
-						delete advancedOptions[prop];
-						var f = new Function("return " + fnc);
-						advancedOptions[prop] = f();
-					}
-				}
-			}
+			convert_string_to_function(advancedOptions);
 			if ( typeof Object.assign != 'function' ) {
-				// ?
+				console.log("WP Data Access ERROR: Invalid table options (advanced) " + table_name);
 			} else {
 				jQueryDataTablesOptions = Object.assign(jQueryDataTablesOptions, advancedOptions);
 			}
 		}
 		catch(err) {
-			console.log("WP Data Access ERROR: Invalid table options (advanced) "+table_name);
+			console.log("WP Data Access ERROR: Invalid table options (advanced) " + table_name);
 		}
 	}
 
 	jQuery("#" + table_name + pub_id).addClass('wpda-datatable');
 	jQuery("#" + table_name + pub_id).DataTable(jQueryDataTablesOptions);
+}
+
+function convert_string_to_function(obj) {
+	for (var prop in obj) {
+		if (typeof obj[prop]=='string') {
+			if (obj[prop].substr(0,8)=='function') {
+				fnc = obj[prop];
+				delete obj[prop];
+				var f = new Function("return " + fnc);
+				obj[prop] = f();
+			}
+		} else {
+			convert_string_to_function(obj[prop]);
+		}
+	}
+}
+
+function hide_header_and_footer_of_hidden_column(table_name, pub_id, i) {
+	// Hide labels of dynamic hyperlinks and double header rows
+	var tr_head0 = jQuery("#" + table_name + pub_id).find('thead tr').eq(0);
+	tr_head0.find('th').eq(i).hide();
+	tr_head0.find('td').eq(i).hide();
+
+	var tr_head1 = jQuery("#" + table_name + pub_id).find('thead tr').eq(1);
+	tr_head1.find('th').eq(i).hide();
+	tr_head1.find('td').eq(i).hide();
+
+	var tr_foot  = jQuery("#" + table_name + pub_id).find('tfoot tr').eq(0);
+	tr_foot.find('th').eq(i).hide().find('td').eq(i).hide();
 }

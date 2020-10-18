@@ -1,3 +1,11 @@
+##### [Version 3.0.5](https://github.com/Codeinwp/hestia-pro/compare/v3.0.4...v3.0.5) (2020-09-29)
+
+- [Fix] Responsive slider controls in Customizer
+- [Fix][Pro] Seamless add to cart mechanism
+- [Fix][Pro] Compatibility between Custom Layouts and the latest version of Brizy
+- [Fix][Pro] Better handling of the features list available in each package
+- [Fix][Pro] Correct CSS classes used with the [hestia_contact] shortcode
+
 ##### [Version 3.0.4](https://github.com/Codeinwp/hestia-pro/compare/v3.0.3...v3.0.4) (2020-08-03)
 
 - [Fix] Compatibility with WP 5.5

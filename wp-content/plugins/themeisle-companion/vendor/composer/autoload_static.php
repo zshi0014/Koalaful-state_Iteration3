@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitf256cea22bf594f4ba3492a716517eaf
+class ComposerStaticInit66e4adc309d0c4c6bf763eebd4bb9918
 {
     public static $files = array (
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
@@ -106,13 +106,17 @@ class ComposerStaticInitf256cea22bf594f4ba3492a716517eaf
         'GuzzleHttp\\Psr7\\CachingStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/CachingStream.php',
         'GuzzleHttp\\Psr7\\DroppingStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/DroppingStream.php',
         'GuzzleHttp\\Psr7\\FnStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/FnStream.php',
+        'GuzzleHttp\\Psr7\\Header' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Header.php',
         'GuzzleHttp\\Psr7\\InflateStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/InflateStream.php',
         'GuzzleHttp\\Psr7\\LazyOpenStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/LazyOpenStream.php',
         'GuzzleHttp\\Psr7\\LimitStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/LimitStream.php',
+        'GuzzleHttp\\Psr7\\Message' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Message.php',
         'GuzzleHttp\\Psr7\\MessageTrait' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/MessageTrait.php',
+        'GuzzleHttp\\Psr7\\MimeType' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/MimeType.php',
         'GuzzleHttp\\Psr7\\MultipartStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/MultipartStream.php',
         'GuzzleHttp\\Psr7\\NoSeekStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/NoSeekStream.php',
         'GuzzleHttp\\Psr7\\PumpStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/PumpStream.php',
+        'GuzzleHttp\\Psr7\\Query' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Query.php',
         'GuzzleHttp\\Psr7\\Request' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Request.php',
         'GuzzleHttp\\Psr7\\Response' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Response.php',
         'GuzzleHttp\\Psr7\\Rfc7230' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Rfc7230.php',
@@ -124,6 +128,7 @@ class ComposerStaticInitf256cea22bf594f4ba3492a716517eaf
         'GuzzleHttp\\Psr7\\Uri' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Uri.php',
         'GuzzleHttp\\Psr7\\UriNormalizer' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/UriNormalizer.php',
         'GuzzleHttp\\Psr7\\UriResolver' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/UriResolver.php',
+        'GuzzleHttp\\Psr7\\Utils' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Utils.php',
         'Http\\Client\\Curl\\Client' => __DIR__ . '/..' . '/php-http/curl-client/src/Client.php',
         'Http\\Client\\Curl\\CurlPromise' => __DIR__ . '/..' . '/php-http/curl-client/src/CurlPromise.php',
         'Http\\Client\\Curl\\MultiRunner' => __DIR__ . '/..' . '/php-http/curl-client/src/MultiRunner.php',
@@ -264,9 +269,9 @@ class ComposerStaticInitf256cea22bf594f4ba3492a716517eaf
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitf256cea22bf594f4ba3492a716517eaf::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitf256cea22bf594f4ba3492a716517eaf::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitf256cea22bf594f4ba3492a716517eaf::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit66e4adc309d0c4c6bf763eebd4bb9918::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit66e4adc309d0c4c6bf763eebd4bb9918::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit66e4adc309d0c4c6bf763eebd4bb9918::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -1,0 +1,41 @@
+<div class="doughnutChart" >
+<div id="canvas-holder" style="width:40%"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+<canvas id="myChart" style="display: block; height: 300px; width: 300px;" width="700" height="300" ></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+// And for a doughnut chart
+var myDoughnutChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+				datasets: [{
+					data: [23005,16130,27720,18840
+						
+					],
+					backgroundColor: [
+						'#0FC5E5','#F7C488','#F69EAE','#97B3F3'
+					],
+				}],
+				labels: [
+					'QLD','NSW','VIC','SA'
+				]
+			},
+    options: {
+				responsive: true,
+				legend: {
+					position: 'left',
+				},
+				title: {
+					display: true,
+					text: 'Estimated Koala Population for 2018',
+                    fontSize:'16'
+				},
+				animation: {
+					animateScale: true,
+					animateRotate: true
+				}
+			}
+});
+</script>

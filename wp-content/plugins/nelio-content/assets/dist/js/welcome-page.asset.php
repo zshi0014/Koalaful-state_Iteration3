@@ -1,1 +1,1 @@
-<?php return array('dependencies' => array('nelio-content-utils', 'react', 'wp-api-fetch', 'wp-components', 'wp-compose', 'wp-element', 'wp-i18n'), 'version' => '66b21469960af82d4203dbb6b0ca4a75');
+<?php return array('dependencies' => array('nelio-content-utils', 'react', 'wp-api-fetch', 'wp-components', 'wp-compose', 'wp-element', 'wp-i18n'), 'version' => '4e54d1ba54c4fd3cc6897d318450c7e6');

@@ -118,8 +118,10 @@
 						$( '.is-menu-wrapper' ).removeClass( 'is-expanded' );
 					}
 				);
+				$( '.is-ajax-search-result, .is-ajax-search-details' ).hide();
 			} else if ( $( '.is-menu' ).hasClass( 'is-dropdown' ) ) {
 				$( '.is-menu form' ).fadeOut();
+				$( '.is-ajax-search-result, .is-ajax-search-details' ).hide();
 			}
 		}
 	});

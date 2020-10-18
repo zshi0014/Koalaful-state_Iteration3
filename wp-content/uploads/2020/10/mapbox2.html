@@ -1,0 +1,177 @@
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width= device-width,initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+        
+        
+    <style>
+        .container .mapboxgl-ctrl-geocoder {
+            min-width: 180px;
+            padding-left: 20px
+        }
+
+        .containr .mapbox-directions-origin .mapboxgl-ctrl-geocoder input {
+            font-size: 11px;
+        }
+
+        .container .mapbox-directions-destination .mapboxgl-ctrl-geocoder input {
+            font-size: 11px;
+        }
+
+        .mapbox-directions-component,
+        .mapbox-directions-component *,
+        .mapbox-directions-component *:after,
+        .mapbox-directions-component *:before {
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: border-box;
+            width: 220px;
+        }
+
+        .container .directions-control {
+            width: 85%;
+        }
+
+        .container .mapboxgl-popup {
+            font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        }
+
+        .container .accidentmap {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+    </style>
+    <!--library for direction-->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" type="text/css" />   
+</head>
+
+<div class="container">
+    <div id='map' class="accidentmap"></div>
+</div>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiemVwaHlyemhhbjIxIiwiYSI6ImNrYXRhZDB5eTBsa2YzNHIyeGN0NXc0NGcifQ.Ndl-f8G7AbzxQnEMOJ1Rnw';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/zephyrzhan21/ckemix6ou2c5419n05rriy9v1',
+        center: [150.8, -27.4],
+        zoom: 6 
+    });
+ map.on('load', function() {   
+        map.addSource('places', {
+            'type': 'geojson',
+            'data': '/wp-content/uploads/2020/09/dataset.json'
+        });
+
+        // Add a layer showing the places.
+        map.addLayer({
+            'id': 'places',
+            'type': 'circle',
+            'source': 'places',
+            'layout': {
+                'visibility': 'visible'
+            },
+            'paint': {
+                'circle-color': '#ffffff',
+                'circle-radius': 10,
+                'circle-opacity': 0
+            }
+        });
+ 
+    
+
+        // Create a popup, but don't add it to the map yet.
+        var popup = new mapboxgl.Popup({
+            closeButton: false,
+            closeOnClick: false
+        });
+
+        map.on('mouseenter', 'places', function(e) {
+           /* // Change the cursor style as a UI indicator.
+            map.getCanvas().style.cursor = 'pointer';*/
+
+            var coordinates = e.features[0].geometry.coordinates.slice();
+            var description = e.features[0].properties.description;
+
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            // Populate the popup and set its coordinates
+            // based on the feature found.
+            popup
+                .setLngLat(coordinates)
+                .setHTML(description)
+                .addTo(map);
+        });
+
+        map.on('mouseleave', 'places', function() {
+            map.getCanvas().style.cursor = '';
+            popup.remove();
+        });
+
+        map.addControl(
+            new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                // limit results to Australia
+                countries: 'au',
+
+                // further limit results to the geographic bounds representing the region of
+                // NSW
+                //bbox: [139.965, -38.03, 155.258, -27.839],
+
+                // apply a client side filter to further limit results to those strictly within
+                // the New South Wales region
+                filter: function(item) {
+                    // returns true if item contains New South Wales region
+                    return item.context
+                        .map(function(i) {
+                            // id is in the form {index}.{id} per https://github.com/mapbox/carmen/blob/master/carmen-geojson.md
+                            // this example attempts to find the `region` named `Queensland`
+                            return (
+                                i.id.split('.').shift() === 'region' 
+                            );
+                        })
+                        .reduce(function(acc, cur) {
+                            return acc || cur;
+                        });
+                },
+                mapboxgl: mapboxgl
+            })
+        );
+        map.addControl(
+            new mapboxgl.GeolocateControl({
+                positionOptions: {
+                    enableHighAccuracy: true
+                },
+                trackUserLocation: true
+            })
+        );
+       });
+    
+       map.addControl(
+        new MapboxDirections({
+            accessToken: mapboxgl.accessToken
+        }),
+        'top-left'
+    );
+
+</script>
+ <!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
+    <script src='https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js'></script>
+   
+    <!--library for geocoder-->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css" type="text/css" />
+</html>

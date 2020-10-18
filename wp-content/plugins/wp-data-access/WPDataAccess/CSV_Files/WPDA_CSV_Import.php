@@ -15,13 +15,8 @@ namespace WPDataAccess\CSV_Files {
 		protected $action      = null;
 
 		public function __construct() {
-			$this->schema_name =
-				isset( $_REQUEST['schema_name'] ) ?
-					sanitize_text_field( wp_unslash( $_REQUEST['schema_name'] ) ) : null; // input var okay.
-
-			if ( null === $this->schema_name ) {
-				wp_die( __( 'ERROR: Missing argument', 'wp-data-access' ) );
-			}
+			global $wpdb;
+			$this->schema_name = $wpdb->dbname;
 
 			$this->action =
 				isset( $_REQUEST['action'] ) ?
@@ -276,9 +271,30 @@ namespace WPDataAccess\CSV_Files {
 							for ( $column = 0; $column < sizeof( $data ); $column++ ) {
 								if ( isset( $table_columns[ $column ] ) ) {
 									// Add column to array
-									$wpda_insert_column_values[ $table_columns[ $column ] ] = $data[ $column ];
+									if ( isset( $table_columns[ $column ] ) ) {
+										if (
+												'number' === $data_type[ $table_columns[ $column ] ] ||
+												'date' === $data_type[ $table_columns[ $column ] ]
+										) {
+											if ( '' === $data[ $column ] ) {
+												$wpda_insert_column_values[ $table_columns[ $column ] ] = null;
+											} else {
+												if ( 'number' === $data_type[ $table_columns[ $column ] ] ) {
+													$wpda_insert_column_values[ $table_columns[ $column ] ] = $data[ $column ];
+												} else {
+													$convert_date = \DateTime::createFromFormat( str_replace( '%', '', $date_format ), $data[ $column ] );
+													$item_value   = $convert_date->format( 'Y-m-d' );
+
+													$wpda_insert_column_values[ $table_columns[ $column ] ] = $item_value;
+												}
+											}
+										} else {
+											$wpda_insert_column_values[ $table_columns[ $column ] ] = $data[ $column ];
+										}
+									}
 								}
 							}
+							// var_dump( $wpda_insert_column_values );
 							// Insert row
 							$result = $wpdadb->insert(
 								$table_name,
@@ -312,6 +328,7 @@ namespace WPDataAccess\CSV_Files {
 								}
 								$insert = substr( $insert, 0, strlen( $insert) - 1 );
 								$insert .= ")";
+								// var_dump( $insert );
 								if ( false === $wpdadb->query( $insert ) ) {
 									if ( '' === $wpdadb->last_error ) {
 										echo "Error: {$insert}<br/>";

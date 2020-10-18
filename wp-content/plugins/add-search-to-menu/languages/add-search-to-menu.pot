@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ivory Search\n"
-"POT-Creation-Date: 2020-09-17 00:30+0530\n"
+"POT-Creation-Date: 2020-10-01 13:19+0530\n"
 "PO-Revision-Date: 2020-03-17 21:05+0530\n"
 "Last-Translator: \n"
 "Language-Team: Ivory Search <admin@ivorysearch.com>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "The changes you made will be lost if you navigate away from this page."
 msgstr ""
 
-#: ../admin/class-is-admin.php:138 ../admin/class-is-settings-fields.php:357
+#: ../admin/class-is-admin.php:138 ../admin/class-is-settings-fields.php:362
 #: ../admin/partials/search-form.php:23
 msgid "Edit Search Form"
 msgstr ""
@@ -991,8 +991,8 @@ msgid ""
 msgstr ""
 
 #: ../admin/class-is-help.php:79 ../admin/class-is-list-table.php:154
-#: ../admin/class-is-settings-fields.php:441
-#: ../admin/class-is-settings-fields.php:471
+#: ../admin/class-is-settings-fields.php:446
+#: ../admin/class-is-settings-fields.php:476
 #: ../includes/class-is-search-form.php:559 ../includes/class-is-widget.php:83
 msgid "Edit"
 msgstr ""
@@ -1143,316 +1143,316 @@ msgstr ""
 msgid "d/m/Y"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:139
+#: ../admin/class-is-settings-fields.php:144
 msgid "Custom CSS"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:140
+#: ../admin/class-is-settings-fields.php:145
 msgid "Stopwords"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:141
+#: ../admin/class-is-settings-fields.php:146
 msgid "Synonyms"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:142
+#: ../admin/class-is-settings-fields.php:147
 msgid "Header Search"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:143
+#: ../admin/class-is-settings-fields.php:148
 msgid "Footer Search"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:144
+#: ../admin/class-is-settings-fields.php:149
 msgid "Mobile Search"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:145
+#: ../admin/class-is-settings-fields.php:150
 msgid "Plugin Files"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:146
+#: ../admin/class-is-settings-fields.php:151
 msgid "Advanced"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:154
+#: ../admin/class-is-settings-fields.php:159
 msgid "Menu Search Settings"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:161
-#: ../admin/class-is-settings-fields.php:182
+#: ../admin/class-is-settings-fields.php:166
+#: ../admin/class-is-settings-fields.php:187
 msgid "Search Analytics"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:172
+#: ../admin/class-is-settings-fields.php:177
 msgid "Configure Menu Search"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:192
+#: ../admin/class-is-settings-fields.php:197
 msgid "Advanced Website Search Settings"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:204
+#: ../admin/class-is-settings-fields.php:209
 msgid "Display search form on selected menu locations."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:220
+#: ../admin/class-is-settings-fields.php:225
 #, php-format
 msgid "No menu assigned to navigation menu location in the %sMenus screen%s."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:223
+#: ../admin/class-is-settings-fields.php:228
 msgid "Navigation menu location is not registered on the site."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:232
+#: ../admin/class-is-settings-fields.php:237
 msgid "Display search form on selected menus."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:247
+#: ../admin/class-is-settings-fields.php:252
 #, php-format
 msgid "No menu created in the %sMenus screen%s."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:268
+#: ../admin/class-is-settings-fields.php:273
 msgid "Display search form at the start of the navigation menu"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:274
+#: ../admin/class-is-settings-fields.php:279
 msgid "Select menu search form style."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:278
+#: ../admin/class-is-settings-fields.php:283
 msgid "Default"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:279
+#: ../admin/class-is-settings-fields.php:284
 msgid "Dropdown"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:280
+#: ../admin/class-is-settings-fields.php:285
 msgid "Sliding"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:281
+#: ../admin/class-is-settings-fields.php:286
 msgid "Full Width"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:282
+#: ../admin/class-is-settings-fields.php:287
 msgid "Popup"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:309
+#: ../admin/class-is-settings-fields.php:314
 msgid "Select menu magnifier icon color."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:322
+#: ../admin/class-is-settings-fields.php:327
 msgid "Display search form close icon"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:329
+#: ../admin/class-is-settings-fields.php:334
 msgid "Add menu title to display in place of search icon."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:339
+#: ../admin/class-is-settings-fields.php:344
 msgid "Select search form that will control menu search functionality."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:350
-#: ../admin/class-is-settings-fields.php:433
-#: ../admin/class-is-settings-fields.php:465
+#: ../admin/class-is-settings-fields.php:355
+#: ../admin/class-is-settings-fields.php:438
+#: ../admin/class-is-settings-fields.php:470
 msgid "None"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:359
-#: ../admin/class-is-settings-fields.php:443
-#: ../admin/class-is-settings-fields.php:473 ../includes/class-is-widget.php:85
+#: ../admin/class-is-settings-fields.php:364
+#: ../admin/class-is-settings-fields.php:448
+#: ../admin/class-is-settings-fields.php:478 ../includes/class-is-widget.php:85
 msgid "Create New"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:367
+#: ../admin/class-is-settings-fields.php:372
 msgid "Add class to search form menu item."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:373
+#: ../admin/class-is-settings-fields.php:378
 msgid "Add multiple classes seperated by space."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:379
+#: ../admin/class-is-settings-fields.php:384
 msgid ""
 "Add Google Custom Search( CSE ) search form code that will replace default "
 "search form."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:397
+#: ../admin/class-is-settings-fields.php:402
 msgid "Enabled"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:398
+#: ../admin/class-is-settings-fields.php:403
 msgid "Disabled"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:399
+#: ../admin/class-is-settings-fields.php:404
 msgid "Google Analytics tracking for searches"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:400
+#: ../admin/class-is-settings-fields.php:405
 msgid "Search Analytics uses Google Analytics to track searches."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:401
+#: ../admin/class-is-settings-fields.php:406
 #, php-format
 msgid "You need %s Google Analytics %s to be installed on your site."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:402
+#: ../admin/class-is-settings-fields.php:407
 msgid ""
 "Data will be visible inside Google Analytics 'Events' and 'Site Search' "
 "report."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:403
+#: ../admin/class-is-settings-fields.php:408
 msgid "Events will be as below:"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:404
+#: ../admin/class-is-settings-fields.php:409
 msgid "Category - Results Found / Nothing Found"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:405
+#: ../admin/class-is-settings-fields.php:410
 msgid "Action - Ivory Search - ID"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:406
+#: ../admin/class-is-settings-fields.php:411
 msgid "Label - Value of search term"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:407
+#: ../admin/class-is-settings-fields.php:412
 #, php-format
 msgid ""
 "Need to %s activate Site Search feature %s inside Google Analytics to "
 "display data inside 'Site Search' report."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:408
+#: ../admin/class-is-settings-fields.php:413
 msgid ""
 "Enable Site search Tracking option in Site Search Settings and set its "
 "parameters as below."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:409
+#: ../admin/class-is-settings-fields.php:414
 msgid "Query parameter - s"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:410
+#: ../admin/class-is-settings-fields.php:415
 msgid "Category parameter - id / result"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:421
+#: ../admin/class-is-settings-fields.php:426
 msgid "Select search form to display in site header( Not Menu )."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:446
+#: ../admin/class-is-settings-fields.php:451
 msgid ""
 "Please note that the above option displays search form in site header and "
 "not in navigation menu."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:454
+#: ../admin/class-is-settings-fields.php:459
 msgid "Select search form to display in site footer."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:489
+#: ../admin/class-is-settings-fields.php:494
 msgid "Display search form in site header on mobile devices"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:492
+#: ../admin/class-is-settings-fields.php:497
 msgid ""
 "If this site uses cache then please select the below option to display "
 "search form on mobile."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:499
+#: ../admin/class-is-settings-fields.php:504
 msgid "This site uses cache"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:508
+#: ../admin/class-is-settings-fields.php:513
 msgid "Add custom CSS code."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:521
+#: ../admin/class-is-settings-fields.php:526
 msgid "Add Stopwords that will not be searched."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:526
+#: ../admin/class-is-settings-fields.php:531
 msgid "Please separate multiple words with commas."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:535
+#: ../admin/class-is-settings-fields.php:540
 msgid "Add synonyms to make the searches find better results."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:537
+#: ../admin/class-is-settings-fields.php:542
 msgid ""
 "If you add bird = crow to the list of synonyms, searches for bird "
 "automatically become a search for bird crow and will thus match to posts "
 "that include either bird or crow."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:542
+#: ../admin/class-is-settings-fields.php:547
 msgid "The format here is key = value"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:543
+#: ../admin/class-is-settings-fields.php:548
 msgid "Please add every synonyms key = value pairs on new line."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:545
+#: ../admin/class-is-settings-fields.php:550
 msgid ""
 "This only works for search forms configured to search any of the search "
 "terms(OR) and not all search terms(AND) in the search form Options."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:554
+#: ../admin/class-is-settings-fields.php:559
 msgid ""
 "Enable below options to disable loading of plugin CSS and JavaScript files."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:558
+#: ../admin/class-is-settings-fields.php:563
 msgid "Do not load plugin CSS files"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:559
+#: ../admin/class-is-settings-fields.php:564
 msgid "Do not load plugin JavaScript files"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:575
+#: ../admin/class-is-settings-fields.php:580
 msgid ""
 "If checked, you have to add following plugin file code into your child theme "
 "CSS file."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:580
+#: ../admin/class-is-settings-fields.php:585
 msgid ""
 "If checked, you have to add following plugin files code into your child "
 "theme JavaScript file."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:597
+#: ../admin/class-is-settings-fields.php:602
 msgid "Warning: Use with caution."
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:602
+#: ../admin/class-is-settings-fields.php:607
 msgid ""
 "Do not use Default Search Form to control WordPress default search "
 "functionality"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:611
+#: ../admin/class-is-settings-fields.php:616
 msgid "Disable search functionality on entire website"
 msgstr ""
 
-#: ../admin/class-is-settings-fields.php:621
+#: ../admin/class-is-settings-fields.php:626
 msgid ""
 "Display easy edit links of search form on the website frontend to the admin "
 "users"

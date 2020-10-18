@@ -1,3 +1,29 @@
+= 4.5.4 =
+* Fixed - Elementor nav menu compatibility issue.
+* Fixed - AJAX search results scroll issue.
+* Fixed - Polylang plugin support issue.
+* Fixed - JSON response error occured on saving page containing search form shortcode.
+* Improved - Plugin settings UI.
+
+= 4.5.3 =
+* Added - Displayed total found posts count in the AJAX search results.
+* Added - Displayed product variation details in the AJAX search results.
+* Fixed - AJAX Search results details box goes out of screen.
+* Fixed - Do not search in URLs if Fuzzy Matching option set to Whole.
+* Improved - Made AJAX search results customizable as a theme template.
+* Improved - Merged Search Form Customizer and AJAX Search Customizer options.
+* Improved - Updated Freemius SDK to version 2.4.0
+
+= 4.5.2 =
+* Improved - Search form & AJAX search results UI.
+* Improved - Optimized plugin CSS & JS files loading.
+
+= 4.5.1 =
+* Removed - Tracking search results as pageview in Google analytics.
+
+= 4.5 =
+* Added - Option to track searches in google search analytics.
+
 = 4.4.14 =
 * Fixed - Page was scrolling to bottom clicking on menu search icon.
 * Added - is_show_menu_link_title filter to remove menu search link title.

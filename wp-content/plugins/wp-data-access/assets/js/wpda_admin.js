@@ -102,6 +102,10 @@ function escapeHtml(string) {
 
 function submit_table_settings(rownum, jsonstring, submitform, table_name) {
 	table_settings = {};
+
+	table_settings['row_level_security'] =
+		jQuery('#' + table_name + '_row_level_security').is(':checked') ? 'true' : 'false';
+
 	table_settings['hyperlink_definition'] =
 		jQuery('#' + table_name + 'table_top_setting_hyperlink_definition_json').is(':checked') ? 'json' : 'text';
 

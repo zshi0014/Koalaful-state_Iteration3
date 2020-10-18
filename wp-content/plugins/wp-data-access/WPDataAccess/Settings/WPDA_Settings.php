@@ -2921,7 +2921,7 @@ namespace WPDataAccess\Settings {
 
 			// Count old backup tables
 			$bck_postfix      = '_BACKUP_';
-			$query            = "select table_name from information_schema.tables " .
+			$query            = "select table_name AS table_name from information_schema.tables " .
 			                    "where table_schema = '{$wpdb->dbname}' " .
 			                    " and ( table_name like '$menus_table_name{$bck_postfix}%' " .
 			                    " or table_name like '$design_table_name{$bck_postfix}%' " .
@@ -2949,7 +2949,7 @@ namespace WPDataAccess\Settings {
 				}
 
 				// Count backup tables again...
-				$query = "select table_name from information_schema.tables " .
+				$query = "select table_name AS table_name from information_schema.tables " .
 				         "where table_schema = '{$wpdb->dbname}' " .
 				         " and ( table_name like '$menus_table_name{$bck_postfix}%' " .
 				         " or table_name like '$design_table_name{$bck_postfix}%' " .

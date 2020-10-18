@@ -88,6 +88,12 @@ class WP_Data_Access_Public
             WPDA::get_option( WPDA::OPTION_WPDA_VERSION )
         );
         wp_register_style(
+            'wpda_datatables_default',
+            plugins_url( '../assets/css/wpda_datatables_default.css', __FILE__ ),
+            [],
+            WPDA::get_option( WPDA::OPTION_WPDA_VERSION )
+        );
+        wp_register_style(
             'wpda_datatables',
             plugins_url( '../assets/css/wpda_datatables.css', __FILE__ ),
             [],

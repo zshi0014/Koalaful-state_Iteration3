@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License v2 or later.=!>
 msgid ""
 msgstr ""
-"Project-Id-Version: Hestia Pro 3.0.4\n"
+"Project-Id-Version: Hestia Pro 3.0.5\n"
 "Report-Msgid-Bugs-To: https://github.com/Codeinwp/hestia-pro/issues\n"
-"POT-Creation-Date: 2020-08-03 10:21:04+00:00\n"
+"POT-Creation-Date: 2020-09-29 09:47:29+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -405,15 +405,15 @@ msgstr ""
 msgid "Save Hooks"
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:231
-#: inc/addons/class-hestia-main-addon.php:238
+#: inc/addons/class-hestia-main-addon.php:197
+#: inc/addons/class-hestia-main-addon.php:204
 #. translators: %s - Theme name
 msgid ""
 "Need more details? Please check our full documentation for detailed "
 "information on how to use %s."
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:233
+#: inc/addons/class-hestia-main-addon.php:199
 #: inc/addons/customizer/class-hestia-customizer-notices-addon.php:75
 msgid ""
 "Extend your theme functionality with various modules like Social Media "
@@ -421,7 +421,7 @@ msgid ""
 "page builder addons and free stock featured images."
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:235
+#: inc/addons/class-hestia-main-addon.php:201
 #. translators: %1$s - Theme name
 msgid ""
 "We want to make sure you have the best experience using %1$s and that is "
@@ -429,18 +429,18 @@ msgid ""
 "will enjoy using %1$s, as much as we enjoy creating great products."
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:244
-#: inc/addons/class-hestia-main-addon.php:246
+#: inc/addons/class-hestia-main-addon.php:210
+#: inc/addons/class-hestia-main-addon.php:212
 #. translators: %s - Theme name
 msgid "About %s"
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:248
+#: inc/addons/class-hestia-main-addon.php:214
 #. translators: %s - Theme name
 msgid "Welcome to %s! - Version "
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:250
+#: inc/addons/class-hestia-main-addon.php:216
 #. translators: %s - Theme name
 msgid ""
 "%s is a modern WordPress theme for professionals. It fits creative "
@@ -453,42 +453,42 @@ msgid ""
 "friendly, and uses Material Kit for design."
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:284
+#: inc/addons/class-hestia-main-addon.php:250
 #: inc/core/class-hestia-public.php:781
 msgid "Blog Subscribe Section"
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:351
+#: inc/addons/class-hestia-main-addon.php:317
 msgid "Secondary"
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:361
+#: inc/addons/class-hestia-main-addon.php:327
 #: inc/core/class-hestia-public.php:444
 #: inc/customizer/general/class-hestia-typography-controls.php:146
 msgid "Body"
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:366
+#: inc/addons/class-hestia-main-addon.php:332
 msgid "Header Overlay"
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:371
+#: inc/addons/class-hestia-main-addon.php:337
 msgid "Header Text"
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:376
+#: inc/addons/class-hestia-main-addon.php:342
 msgid "Navbar Background"
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:381
+#: inc/addons/class-hestia-main-addon.php:347
 msgid "Navbar Text"
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:386
+#: inc/addons/class-hestia-main-addon.php:352
 msgid "Navbar Text Hover"
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:391
+#: inc/addons/class-hestia-main-addon.php:357
 #: inc/addons/customizer/general/class-hestia-color-controls-addon.php:117
 msgid "Transparent Navbar Text Color"
 msgstr ""
@@ -1100,11 +1100,11 @@ msgstr ""
 msgid "Menu"
 msgstr ""
 
-#: inc/addons/customizer/general/class-hestia-white-label-controls-addon.php:78
+#: inc/addons/customizer/general/class-hestia-white-label-controls-addon.php:87
 msgid "White Label"
 msgstr ""
 
-#: inc/addons/customizer/general/class-hestia-white-label-controls-addon.php:95
+#: inc/addons/customizer/general/class-hestia-white-label-controls-addon.php:104
 msgid ""
 "Using the White Label module provided by Hestia Pro, you can easily rename "
 "and present the theme as your own. White labeling is mostly used by "
@@ -1112,7 +1112,7 @@ msgid ""
 "want to prove they are the developers of the theme."
 msgstr ""
 
-#: inc/addons/customizer/general/class-hestia-white-label-controls-addon.php:98
+#: inc/addons/customizer/general/class-hestia-white-label-controls-addon.php:107
 msgid "White Label Settings"
 msgstr ""
 

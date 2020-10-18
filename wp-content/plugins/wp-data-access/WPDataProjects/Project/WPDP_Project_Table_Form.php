@@ -852,7 +852,7 @@ namespace WPDataProjects\Project {
 								<?php echo __( 'Target table name', 'wp-data-access' ) ?>
 							</th>
 							<th>
-								<?php echo __( 'Target column name()', 'wp-data-access' ) ?>
+								<?php echo __( 'Target column name', 'wp-data-access' ) ?>
 							</th>
 							<th>
 								<span style="vertical-align:inherit">

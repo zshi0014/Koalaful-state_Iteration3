@@ -129,16 +129,22 @@ class IS_Settings_Fields
      */
     function register_settings_fields()
     {
+        
         if ( !empty($GLOBALS['pagenow']) && 'options.php' === $GLOBALS['pagenow'] ) {
+            global  $wp_version ;
+            $temp_oname = 'whitelist_options';
+            if ( version_compare( $wp_version, '5.5', '>=' ) ) {
+                $temp_oname = 'allowed_options';
+            }
             
             if ( isset( $_POST['is_menu_search'] ) ) {
-                add_filter( 'allowed_options', function ( $allowed_options ) {
+                add_filter( $temp_oname, function ( $allowed_options ) {
                     $allowed_options['ivory_search'][0] = 'is_menu_search';
                     return $allowed_options;
                 } );
             } else {
                 if ( isset( $_POST['is_analytics'] ) ) {
-                    add_filter( 'allowed_options', function ( $allowed_options ) {
+                    add_filter( $temp_oname, function ( $allowed_options ) {
                         $allowed_options['ivory_search'][0] = 'is_analytics';
                         return $allowed_options;
                     } );
@@ -146,6 +152,7 @@ class IS_Settings_Fields
             }
         
         }
+        
         
         if ( !isset( $_GET['tab'] ) || 'settings' === $_GET['tab'] ) {
             add_settings_section(

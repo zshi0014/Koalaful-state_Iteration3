@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitb9cfacbbe5ba05348b6d27a12281de44
+class ComposerStaticInitf23e0826593ffe92dbfc8a52feeaa061
 {
     public static $classMap = array (
         'Nelio_Content_Abstract_Page' => __DIR__ . '/../..' . '/admin/pages/abstract-class-nelio-content-abstract-page.php',
@@ -62,7 +62,7 @@ class ComposerStaticInitb9cfacbbe5ba05348b6d27a12281de44
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInitb9cfacbbe5ba05348b6d27a12281de44::$classMap;
+            $loader->classMap = ComposerStaticInitf23e0826593ffe92dbfc8a52feeaa061::$classMap;
 
         }, null, ClassLoader::class);
     }

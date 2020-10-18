@@ -499,10 +499,23 @@ namespace WPDataAccess\Utilities {
 											  style="cursor:pointer;vertical-align:bottom;"></span>
 									</a>
 									<ul class="wpda_table_settings_nested">
+										<div style="font-size:90%;">
+											<label class="wpda_action_font">
+												<input type="checkbox"
+													   id="<?php echo esc_attr( $this->table_name ); ?>_row_level_security"
+														<?php
+														if ( isset( $settings_db_custom->table_settings->row_level_security ) ) {
+															echo 'true'===$settings_db_custom->table_settings->row_level_security ? 'checked' : '';
+														}
+														?>
+												/>
+												<?php echo __( 'Enable row level access control', 'wp-data-access' ); ?>
+											</label>
+										</div>
+										<br/>
 										<div style="font-size:90%;font-weight:bold;">
 											<?php echo __( 'Process hyperlink columns as', 'wp-data-access' ); ?>
 										</div>
-										<br/>
 										<div style="font-size:90%;">
 											<label for="<?php echo esc_attr( $this->table_name ); ?>table_top_setting_hyperlink_definition_json">
 												<input type="radio"

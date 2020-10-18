@@ -101,7 +101,7 @@ namespace WPDataAccess\CSV_Files {
 			$import =
 				sprintf(
 					'<a href="javascript:void(0)" class="view" onclick="if (confirm(\'%s\')) { jQuery(\'#import_form%s\').submit(); }">%s</a>',
-					__( "Ones started, a CSV import cannot be interrupted.\\n\\nDo you want to continue?", 'wp-data-access' ),
+					__( "Once started, a CSV import cannot be interrupted.\\n\\nDo you want to continue?", 'wp-data-access' ),
 					$form_id,
 					'Import'
 				);
@@ -153,13 +153,6 @@ namespace WPDataAccess\CSV_Files {
 			}
 
 			return $actions;
-		}
-
-		public function get_hidden_columns() {
-			return [
-				'csv_real_file_name',
-				'csv_mapping',
-			];
 		}
 
 		public function process_bulk_action() {
@@ -247,7 +240,7 @@ namespace WPDataAccess\CSV_Files {
 				$rows_with_errors         = 0; // Number of rows that could not be deleted.
 				for ( $i = 0; $i < $no_rows; $i ++ ) {
 					// Delete CSV file and data
-					$row = WPDA_CSV_Uploads_Model::query( $rows_to_be_deleted[$i] );
+					$row = WPDA_CSV_Uploads_Model::query( $rows_to_be_deleted[ $i ] );
 					if ( is_array( $row ) && 1 === sizeof( $row ) ) {
 						// Silently delete file
 						if ( isset( $row[0]->csv_real_file_name ) ) {
@@ -255,7 +248,7 @@ namespace WPDataAccess\CSV_Files {
 						}
 
 						// Delete record
-						$next_row_to_be_deleted[ 'csv_id' ] = $rows_to_be_deleted[$i];
+						$next_row_to_be_deleted[ 'csv_id' ] = $rows_to_be_deleted[ $i ];
 						if ( $this->delete_row( $next_row_to_be_deleted ) ) {
 							$rows_succesfully_deleted++;
 						} else {
@@ -307,8 +300,10 @@ namespace WPDataAccess\CSV_Files {
 			return [
 				'csv_id'             => __( 'ID', 'wp-data-access' ),
 				'csv_name'           => __( 'Import Name', 'wp-data-access' ),
+				'csv_real_file_name' => __( 'Local file Name', 'wp-data-access' ),
 				'csv_orig_file_name' => __( 'File Name', 'wp-data-access' ),
 				'csv_timestamp'      => __( 'Timestamp', 'wp-data-access' ),
+				'csv_mapping'        => __( 'Mapping', 'wp-data-access' ),
 			];
 		}
 

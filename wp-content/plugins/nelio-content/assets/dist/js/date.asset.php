@@ -1,1 +1,1 @@
-<?php return array('dependencies' => array('moment', 'wp-date'), 'version' => '72ae6c2d3479475f7d76e53733254867');
+<?php return array('dependencies' => array('moment', 'wp-date'), 'version' => '1c05f70d97d1881a2db4c5a25bca54af');

@@ -515,7 +515,6 @@ namespace WPDataProjects\Parent_Child {
 					   value="<?php echo __( 'show more', 'wp-data-access' ); ?> >>>"
 					   class="button"
 					   id="show_more_less_button"
-					   onclick="show_more_less()"
 					   style="float:right;display:none;">
 				<script type='text/javascript'>
 					function show_more_less() {
@@ -529,6 +528,10 @@ namespace WPDataProjects\Parent_Child {
 
 					if (jQuery('.row-show-less-more').length > 0) {
 						jQuery('#show_more_less_button').show();
+
+						jQuery('#show_more_less_button').on('click', function() {
+							show_more_less();
+						});
 					}
 				</script>
 				<?php

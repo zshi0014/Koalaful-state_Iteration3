@@ -444,20 +444,20 @@ class Hestia_Header_Layout_Manager extends Hestia_Abstract_Main {
 			$post_meta_output .= '<p class="author meta-in-content">';
 		}
 
-		//$post_meta_output .= apply_filters(
-			//'hestia_single_post_meta',
-			//sprintf(
+		$post_meta_output .= apply_filters(
+			'hestia_single_post_meta',
+			sprintf(
 				/* translators: %1$s is Author name wrapped, %2$s is Date*/
-				//esc_html__( 'Published by %1$s on %2$s', 'hestia' ),
+				esc_html__( 'Published by %1$s on %2$s', 'hestia' ),
 				/* translators: %1$s is Author name, %2$s is Author link*/
-				//sprintf(
-					//'<a href="%2$s" class="vcard author"><strong class="fn">%1$s</strong></a>',
-					//esc_html( $author_name ),
-					//esc_url( $author_posts_url )
-				//),
-				//$this->get_time_tags()
-			//)
-		//);/
+				sprintf(
+					'<a href="%2$s" class="vcard author"><strong class="fn">%1$s</strong></a>',
+					esc_html( $author_name ),
+					esc_url( $author_posts_url )
+				),
+				$this->get_time_tags()
+			)
+		);
 		if ( 'default' === $header_layout ) {
 			$post_meta_output .= '</h4>';
 		} else {

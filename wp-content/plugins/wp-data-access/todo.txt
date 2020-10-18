@@ -7,14 +7,37 @@
 + When you perform a reconcile, your lookup database/table combinations are messed up (Amy)
 + After adding new parent the child tab is not directly shown (Sebastian)
 + Apache modsecurity blocks plugin (Andrea)
-
 + Update implode: use array as first argument, glue as second (deprecated message in 7.4) (Kooyaya)
++ Hyperlinks Behaviour – Unexpected behaviour in Data Projects (https://wordpress.org/support/topic/hyperlinks-behaviour-unexpected-behaviour-in-data-projects/)
 
 *** WORK IN PROGRESS ***
 
-+ Update documentation
++ Show only selected tables in Data Publisher for non admin users
++ Clear all search items (Charles)
 
++ New Data Publisher video
 + Add premium videos
+  + Advanced search (multiple)
+  + Inline editing
+  + Data Publisher
+    + Adding buttons
+    + Adding filters > add premium search
+  + Data Projects
+    + Adding filters
+    + Adding inline editing
++ Add column renderer code to WP Data Access website
+
++ Improve demos (show possibilities - premium + code manager)
++ Offer apps (FAQ, SAS, BAS)
+
++ Add support for computed columns
++ Add premium forms builder (callable from datagrid, inline forms)
++ Add premium report builder (list + single row display, both responsive)
+
++ Update documentation
++ Update readme (add premium features)
++ Update screenshots
++ Create new Data Publisher tutorial: quick start
 
 + Add logging to csv import
 + Built layer around wpdb class to limit dcl, ddl and some dml access to admin users only

@@ -1,6 +1,26 @@
 ### ChangeLog for WP Data Access
 
-#### 3.6.0 / --- under construction ---
+#### 3.6.5 / 2020-10-14
+
+Added: Parameters wpda_search_placeholder_prefix and wpda_search_placeholder to format search box (Charles)
+Added: Row level access control (Fedi)
+Fixed: Added column alias to prevent case sensitive column nam errors
+Fixed: Date format not taken into account (Erwin)
+Removed: Local version of clipboard library (using WordPress library) 
+Updated: Freemius library
+Fixed: Spaces in dynamic hyperlink arguments not working (Richard)
+Fixed: Uninstall settings not working if not specifically saved
+Added: Select individual columns  individual search per column (Moshe)
+Added: Filter argument to filter wpda_column_default to support priorities (Anastasiia)  
+Fixed: CSV import paging and searching not working (Moshe)
+Added: Define dynamic hyperlink labels in Data Publisher (Charles)
+Changed: Buttons in publication header in separate row (Charles) 
+Fixed: Listbox error in Data Publisher if field value contains quote (Lorelei)
+Changed: Publication columns are now nowrap by default
+Added: Classes to search textbox, listbox and icons (for Charles)
+Added: Recursive option conversion to Data Publisher to support functions on all levels
+
+#### 3.6.0 / 2020-09-12
 
 Added: Parameter wpda_search_placeholder_prefix to change the placeholder
 Changed: Data Publisher no longer requires granting table access
